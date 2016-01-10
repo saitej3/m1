@@ -1,0 +1,51 @@
+{
+  "project_info": {
+    "project_id": "medaramjathara-1185",
+    "project_number": "806546758873",
+    "name": "medaramjathara"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:806546758873:android:7a3c77b36eea859f",
+        "client_id": "android:com.saitej3.medaramjathara",
+        "client_type": 1,
+        "android_client_info": {
+          "package_name": "com.saitej3.medaramjathara"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "806546758873-1dlieppu78gd36mekf6lqualv2m3htn0.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.saitej3.medaramjathara",
+            "certificate_hash": "44D2CA8AEB5D7CF01857E0284880D1932B590059"
+          }
+        }
+      ],
+      "api_key": [],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "cloud_messaging_service": {
+          "status": 2,
+          "apns_config": []
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "google_signin_service": {
+          "status": 2
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "client_info": [],
+  "ARTIFACT_VERSION": "1"
+}
