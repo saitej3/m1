@@ -13,6 +13,7 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.google.android.gms.gcm.GcmListenerService;
+import com.saitej3.medaramjathara.DataBase.DataBaseHandler;
 import com.saitej3.medaramjathara.activity.MainActivity;
 
 public class GCMIntentService extends GcmListenerService {
@@ -35,6 +36,9 @@ public class GCMIntentService extends GcmListenerService {
         Log.d("me", "created");
 
         String message = data.getString("message");
+        DataBaseHandler db=new DataBaseHandler(this);
+        db.addNotification(message);
+
         generateNotification(this,message);
         Log.d(TAG, "From: " + from);
         Log.d(TAG, "Message: " + message);

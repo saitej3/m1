@@ -15,4 +15,15 @@
     <color name="dividerexplist">#000000</color>
     <color name="backgrey">#e6e7e4</color>
     <color name="listitem">#fdfdfd</color>
+
+    <!--dialog ok-->
+    <color name="btn_ok_bg">#eceef1</color>
+    <color name="btn_ok">#26ae90</color>
+    <color name="white">#ffffff</color>
+    <color name="input_tag">#222222</color>
+    <color name="input_tag_hint">#999999</color>
+
+    <color name="direction_color">#40B4F9</color>
+
+
 </resources>

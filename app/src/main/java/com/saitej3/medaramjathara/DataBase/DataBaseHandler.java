@@ -25,6 +25,8 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     private static final String KEY_LAT = "lat";
     private static final String KEY_LONG = "long";
 
+    private static final String TABLE_NOTIFICATIONS="notifications";
+
     public DataBaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
@@ -33,22 +35,41 @@ public class DataBaseHandler extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
+//        String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_LOCATIONS + "("
+//                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
+//                + KEY_LAT + " DOUBLE," +  KEY_LONG + " DOUBLE" +")";
+//
+//
+//        db.execSQL(CREATE_CONTACTS_TABLE);
+
         String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_LOCATIONS + "("
+
                 + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT,"
-                + KEY_LAT + " DOUBLE" +  KEY_LONG + " DOUBLE" +")";
+                + KEY_LAT + " TEXT,"
+                + KEY_LONG + " TEXT" + ")";
 
         db.execSQL(CREATE_CONTACTS_TABLE);
 
+
+        String CREATE_NOTIFICATIONS_TABLE = "CREATE TABLE " + TABLE_NOTIFICATIONS + "("
+
+                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_NAME + " TEXT" +  ")";
+
+        db.execSQL(CREATE_NOTIFICATIONS_TABLE);
+
+
     }
+
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
 
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_LOCATIONS);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NOTIFICATIONS);
         onCreate(db);
     }
 
-    void addLocation(Location l)
+   public  void addLocation(Location l)
     {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -61,12 +82,11 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         db.close(); //
     }
 
-    public List<Location> getAllContacts() {
+    public List<Location> getAllLocations() {
 
         List<Location> locationList = new ArrayList<Location>();
-        String selectQuery = " SELECT  * FROM locations";
-
-        SQLiteDatabase db = this.getWritableDatabase();
+        String selectQuery = " SELECT  * FROM "+TABLE_LOCATIONS;
+        SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(selectQuery, null);
 
         if (cursor.moveToFirst()) {
@@ -76,15 +96,95 @@ public class DataBaseHandler extends SQLiteOpenHelper {
                 Location location = new Location();
                 location.setId(Integer.parseInt(cursor.getString(0)));
                 location.setName(cursor.getString(1));
-                location.setLat(cursor.getDouble(2));
-                location.setLon(cursor.getDouble(3));
+                location.setLat(cursor.getString(2));
+                //location.setLon(cursor.getDouble(3));
 
                 locationList.add(location);
 
             } while (cursor.moveToNext());
 
         }
-
+        db.close();
         return locationList;
     }
+
+    public List<Location> getLocations()
+    {
+        List<Location> locationList=new ArrayList<>();
+        Cursor cursor = this.getReadableDatabase().query(TABLE_LOCATIONS, new String[]{KEY_ID, KEY_NAME, KEY_LAT}, null, null, null, null, null);
+        cursor.moveToFirst();
+        while (!cursor.isAfterLast()) {
+
+            Location l=new Location();
+            l.setId(cursor.getInt(0));
+            l.setName(cursor.getString(1));
+            l.setLat(cursor.getString(2));
+            cursor.moveToNext();
+
+        }
+        return locationList;
+    }
+
+    public Location getLocation(int id) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_LOCATIONS, new String[]{KEY_ID,
+                KEY_NAME, KEY_LAT,KEY_LONG}, KEY_ID + "=?", new String[]{String.valueOf(id)}, null, null, null, null);
+
+        if (cursor != null)
+
+            cursor.moveToFirst();
+
+        Location location = new Location(Integer.parseInt(cursor.getString(0)),
+
+                cursor.getString(1), cursor.getString(2),cursor.getString(3));
+        return location;
+
+    }
+
+    public  void addNotification(String m)
+    {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        values.put(KEY_NAME, m);
+        db.insert(TABLE_NOTIFICATIONS, null, values);
+        db.close();
+    }
+
+
+    public String getNotification(int id) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_NOTIFICATIONS, new String[]{KEY_ID,
+                KEY_NAME}, KEY_ID + "=?", new String[]{String.valueOf(id)}, null, null, null, null);
+
+        if (cursor != null)
+
+            cursor.moveToFirst();
+               return cursor.getString(1);
+
+    }
+
+    public int getNotificationsCount() {
+        String countQuery = "SELECT  * FROM " + TABLE_NOTIFICATIONS;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int cnt = cursor.getCount();
+        cursor.close();
+        return cnt;
+    }
+
+    public int getLocationsCount() {
+        String countQuery = "SELECT  * FROM " + TABLE_LOCATIONS;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int cnt = cursor.getCount();
+        cursor.close();
+        return cnt;
+    }
+
+
 }
