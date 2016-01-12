@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff"
+    android:id="@+id/rel_lay">
+
+    <ImageView
+        android:id="@+id/nitwlogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="90dp"
+        android:src="@drawable/nitwlogo" />
+
+    <TextView
+        android:id="@+id/powered"
+        android:text="Powered"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="230dp"
+        android:visibility="gone"
+        />
+    <ImageView
+        android:id="@+id/godphoto"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/godphoto"
+        android:layout_marginBottom="83dp"
+        android:layout_alignParentBottom="true"
+        android:visibility="gone"
+        android:layout_centerHorizontal="true" />
+
+
+</RelativeLayout>

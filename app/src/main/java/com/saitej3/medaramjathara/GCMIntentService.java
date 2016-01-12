@@ -50,7 +50,7 @@ public class GCMIntentService extends GcmListenerService {
     private  void generateNotification(Context context, String message) {
         NotificationCompat.Builder mBuilder =
                 (NotificationCompat.Builder) new NotificationCompat.Builder(this)
-                        .setSmallIcon(R.mipmap.ic_launcher)
+                        .setSmallIcon(R.mipmap.ic_marker_temple)
                         .setContentTitle("mapsnew")
                         .setContentText(message);
         Intent resultIntent = new Intent(this, MainActivity.class);

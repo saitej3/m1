@@ -212,6 +212,12 @@ public class MapsActivity extends FragmentActivity implements RoutingListener,Go
             MarkerMain.add(m);
         }
 
+        for(MarkerItem markerItem:markerstemple)
+        {
+            Marker m=map.addMarker(new MarkerOptions().position(new LatLng(markerItem.getLat(), markerItem.getLon())).title(markerItem.getName()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_temple)).draggable(true))  ;
+            MarkerMain.add(m);
+        }
+
         for(MarkerItem markerItem:markerscamp)
         {
             Marker m=map.addMarker(new MarkerOptions().position(new LatLng(markerItem.getLat(), markerItem.getLon())).title(markerItem.getName()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_camp)).draggable(true))  ;
