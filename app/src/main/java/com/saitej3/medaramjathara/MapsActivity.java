@@ -27,11 +27,13 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.maps.android.kml.KmlLayer;
 import com.saitej3.medaramjathara.DataBase.DataBaseHandler;
 import com.saitej3.medaramjathara.activity.MyDialog;
 import com.saitej3.medaramjathara.helper.AbstractRouting;
@@ -40,6 +42,9 @@ import com.saitej3.medaramjathara.helper.Routing;
 import com.saitej3.medaramjathara.helper.RoutingListener;
 import com.saitej3.medaramjathara.model.MarkerItem;
 
+import org.xmlpull.v1.XmlPullParserException;
+
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -66,7 +71,60 @@ public class MapsActivity extends FragmentActivity implements RoutingListener,Go
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_maps);
 
-        //map markers
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+            //window.setStatusBarColor(getResources().getColor(R.color.myPrimaryDarkColor));
+        }
+        // ATTENTION: This "addApi(AppIndex.API)"was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .addApi(Places.GEO_DATA_API)
+                .addConnectionCallbacks(this)
+                .addApi(LocationServices.API)
+                .addApi(ActivityRecognition.API)
+                .addOnConnectionFailedListener(this)
+                .addApi(AppIndex.API).build();
+
+
+        MapsInitializer.initialize(this);
+        mGoogleApiClient.connect();
+
+        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
+
+        if (mapFragment == null) {
+            mapFragment = SupportMapFragment.newInstance();
+            getSupportFragmentManager().beginTransaction().replace(R.id.map, mapFragment).commit();
+        }
+        map = mapFragment.getMap();
+
+        CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(18.32328, 80.215589));
+        CameraUpdate zoom = CameraUpdateFactory.zoomTo(12);
+        map.moveCamera(center);
+        map.animateCamera(zoom);
+
+
+
+        try {
+            KmlLayer layer=new KmlLayer(map,R.raw.map_onlylines,getApplicationContext());
+            layer.addLayerToMap();
+        }
+        catch (XmlPullParserException e) {
+            Log.d("XmlParser","Problem with xml parsing");
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        addMarkers();
+
+
+    }
+
+
+    public void addMarkers() {
 
         markers = new ArrayList<>();
         markers.add(new MarkerItem(1, "Helipad at Medaram", 80.241976, 18.318956));
@@ -163,73 +221,33 @@ public class MapsActivity extends FragmentActivity implements RoutingListener,Go
         markersplaces.add(new MarkerItem(85,"Chelpur",79.84268899999999,18.3706343));
         markersplaces.add(new MarkerItem(86,"Bhupalpally",79.8674297,18.438189));
 
-
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            //window.setStatusBarColor(getResources().getColor(R.color.myPrimaryDarkColor));
-        }
-        // ATTENTION: This "addApi(AppIndex.API)"was auto-generated to implement the App Indexing API.
-        // See https://g.co/AppIndexing/AndroidStudio for more information.
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .addApi(Places.GEO_DATA_API)
-                .addConnectionCallbacks(this)
-                .addApi(LocationServices.API)
-                .addApi(ActivityRecognition.API)
-                .addOnConnectionFailedListener(this)
-                .addApi(AppIndex.API).build();
-
-
-        MapsInitializer.initialize(this);
-        mGoogleApiClient.connect();
-
-        SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-
-        if (mapFragment == null) {
-            mapFragment = SupportMapFragment.newInstance();
-            getSupportFragmentManager().beginTransaction().replace(R.id.map, mapFragment).commit();
-        }
-        map = mapFragment.getMap();
-
-        CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(18.32328, 80.215589));
-        CameraUpdate zoom = CameraUpdateFactory.zoomTo(12);
-        map.moveCamera(center);
-        map.animateCamera(zoom);
-
-
-        addMarkers();
-
-
-    }
-
-
-    public void addMarkers() {
         List<Marker> MarkerMain=new ArrayList<>();
+
         for (MarkerItem markerItem : markers) {
-            Marker m=map.addMarker(new MarkerOptions().position(new LatLng(markerItem.getLat(), markerItem.getLon())).title(markerItem.getName()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_park1)).draggable(true))  ;
+            Marker m=map.addMarker(new MarkerOptions().position(new LatLng(markerItem.getLat(), markerItem.getLon())).title(markerItem.getName()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_park1)))  ;
             MarkerMain.add(m);
         }
 
         for(MarkerItem markerItem:markerstemple)
         {
-            Marker m=map.addMarker(new MarkerOptions().position(new LatLng(markerItem.getLat(), markerItem.getLon())).title(markerItem.getName()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_temple)).draggable(true))  ;
+            Marker m=map.addMarker(new MarkerOptions().position(new LatLng(markerItem.getLat(), markerItem.getLon())).title(markerItem.getName()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_temple)))  ;
             MarkerMain.add(m);
         }
 
         for(MarkerItem markerItem:markerscamp)
         {
-            Marker m=map.addMarker(new MarkerOptions().position(new LatLng(markerItem.getLat(), markerItem.getLon())).title(markerItem.getName()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_camp)).draggable(true))  ;
+            Marker m=map.addMarker(new MarkerOptions().position(new LatLng(markerItem.getLat(), markerItem.getLon())).title(markerItem.getName()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_camp)))  ;
             MarkerMain.add(m);
         }
 
         for(MarkerItem markerItem:markersplaces)
         {
-            Marker m=map.addMarker(new MarkerOptions().position(new LatLng(markerItem.getLat(), markerItem.getLon())).title(markerItem.getName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)).draggable(true))  ;
+            Marker m=map.addMarker(new MarkerOptions().position(new LatLng(markerItem.getLat(), markerItem.getLon())).title(markerItem.getName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)))  ;
             MarkerMain.add(m);
         }
 
+        //adding drag listener to call on route function on long click
+        /*
         map.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
             @Override
             public void onMarkerDragStart(Marker marker) {
@@ -246,6 +264,8 @@ public class MapsActivity extends FragmentActivity implements RoutingListener,Go
 
             }
         });
+
+        */
 
 
     }

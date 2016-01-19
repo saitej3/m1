@@ -57,9 +57,23 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
         db.execSQL(CREATE_NOTIFICATIONS_TABLE);
 
+        execInsert(db,1, "Tadvai", "18.235364", "80.315217");
+        execInsert(db,2,"Jangalpally","18.207447","79.984611");
+        execInsert(db,3,"Mahabubabad","17.597458","80.001623");
+        execInsert(db,4,"Narsampet","17.928733","79.894955");
+        execInsert(db,5,"Kamalapur x road","18.483352","79.893851");
+        execInsert(db,6,"Medaram Jathara","18.321168", "80.241647");
+        execInsert(db,7,"Your Location","0","0");
+
 
     }
 
+
+    public void execInsert(SQLiteDatabase db,int id,String name,String lat,String lon)
+    {
+        db.execSQL("insert into " + TABLE_LOCATIONS + "(" + KEY_ID + ","
+                + KEY_NAME + ","+KEY_LAT+","+KEY_LONG+") values("+id+",\'"+name+"\',\'"+lat+"\',\'"+lon+"\')");
+    }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int i, int i1) {
@@ -82,48 +96,7 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         db.close(); //
     }
 
-    public List<Location> getAllLocations() {
 
-        List<Location> locationList = new ArrayList<Location>();
-        String selectQuery = " SELECT  * FROM "+TABLE_LOCATIONS;
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(selectQuery, null);
-
-        if (cursor.moveToFirst()) {
-
-            do {
-
-                Location location = new Location();
-                location.setId(Integer.parseInt(cursor.getString(0)));
-                location.setName(cursor.getString(1));
-                location.setLat(cursor.getString(2));
-                //location.setLon(cursor.getDouble(3));
-
-                locationList.add(location);
-
-            } while (cursor.moveToNext());
-
-        }
-        db.close();
-        return locationList;
-    }
-
-    public List<Location> getLocations()
-    {
-        List<Location> locationList=new ArrayList<>();
-        Cursor cursor = this.getReadableDatabase().query(TABLE_LOCATIONS, new String[]{KEY_ID, KEY_NAME, KEY_LAT}, null, null, null, null, null);
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-
-            Location l=new Location();
-            l.setId(cursor.getInt(0));
-            l.setName(cursor.getString(1));
-            l.setLat(cursor.getString(2));
-            cursor.moveToNext();
-
-        }
-        return locationList;
-    }
 
     public Location getLocation(int id) {
 
@@ -131,6 +104,24 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
         Cursor cursor = db.query(TABLE_LOCATIONS, new String[]{KEY_ID,
                 KEY_NAME, KEY_LAT,KEY_LONG}, KEY_ID + "=?", new String[]{String.valueOf(id)}, null, null, null, null);
+
+        if (cursor != null)
+
+            cursor.moveToFirst();
+
+        Location location = new Location(Integer.parseInt(cursor.getString(0)),
+
+                cursor.getString(1), cursor.getString(2),cursor.getString(3));
+        return location;
+
+    }
+
+    public Location getLocationByName(String name) {
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_LOCATIONS, new String[]{KEY_ID,
+                KEY_NAME, KEY_LAT,KEY_LONG}, KEY_NAME + "=?", new String[]{name}, null, null, null, null);
 
         if (cursor != null)
 

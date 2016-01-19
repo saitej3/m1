@@ -1,0 +1,39 @@
+<resources>
+    <string name="app_name">Material Design</string>
+    <string name="action_settings">Settings</string>
+    <string name="action_search">Search</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
+    <string name="Lang">Language</string>
+
+    <!-- navigation drawer item labels  -->
+    <string-array name="nav_drawer_labels">
+        <item>@string/title_events</item>
+        <item>@string/title_routes</item>
+        <item>@string/title_parking</item>
+        <item>@string/title_emergency</item>
+        <item>@string/title_notifications</item>
+        <item>@string/title_location</item>
+        <item>@string/title_about</item>
+    </string-array>
+
+    <!-- navigation drawer icons -->
+    <array name="nav_drawer_icons">
+        <item>@drawable/ic_action_event</item>
+        <item>@drawable/ic_action_routes</item>
+        <item>@drawable/ic_action_maps</item>
+        <item>@drawable/ic_action_emergency</item>
+        <item>@drawable/ic_action_notification</item>
+        <item>@drawable/ic_action_location</item>
+        <item>@drawable/ic_action_about</item>
+    </array>
+
+    <string name="title_routes">మార్గం</string>
+    <string name="title_events">షెడ్యూల్</string>
+    <string name="title_parking">పార్కింగ్</string>
+    <string name="title_emergency">ఆత్యవసర</string>
+    <string name="title_notifications">సూచనలు</string>
+    <string name="title_location">సేవ్ చేసిన స్థానాలు</string>
+    <string name="title_about">గురించి</string>
+
+</resources>

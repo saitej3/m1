@@ -6,12 +6,14 @@ package com.saitej3.medaramjathara.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.saitej3.medaramjathara.DataBase.DataBaseHandler;
 import com.saitej3.medaramjathara.R;
+import com.saitej3.medaramjathara.model.Location;
 
 
 public class AboutFragment extends Fragment {
@@ -25,7 +27,6 @@ public class AboutFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
 
-
     }
 
     @Override
@@ -34,7 +35,6 @@ public class AboutFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_about, container, false);
 
 
-        // Inflate the layout for this fragment
         return rootView;
     }
 

@@ -9,56 +9,55 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.saitej3.medaramjathara.R;
-import com.saitej3.medaramjathara.model.Location;
+import com.saitej3.medaramjathara.model.RouteObject;
 
 import java.util.ArrayList;
 
 /**
- * Created by Sai Teja on 1/11/2016.
+ * Created by Sai Teja on 1/15/2016.
  */
-public class MyRecyclerViewAdapterLocate extends RecyclerView
-        .Adapter<MyRecyclerViewAdapterLocate.DataObjectHolder>
-{
-    private static String LOG_TAG = "MyRecyclerViewAdapterLocate";
-    private static ArrayList<Location> mDataset;
+public class MyRecyclerViewAdapterRoute extends RecyclerView
+        .Adapter<MyRecyclerViewAdapterRoute.DataObjectHolder> {
+
+    private static String LOG_TAG = "MyRecyclerViewAdapterRoute";
+    private static ArrayList<RouteObject> mDataset;
     private static MyClickListener myClickListener;
 
     public static class DataObjectHolder extends RecyclerView.ViewHolder
             implements View.OnClickListener {
-        TextView locationName;
 
+        TextView textSource;
+        TextView textDestination;
+        TextView textno;
         public DataObjectHolder(View itemView) {
             super(itemView);
-            locationName = (TextView) itemView.findViewById(R.id.textView);
-            Log.i(LOG_TAG, "Adding Listener");
+            textSource = (TextView) itemView.findViewById(R.id.textSource);
+            textno= (TextView) itemView.findViewById(R.id.textViewNo);
+            textDestination = (TextView) itemView.findViewById(R.id.textDestination);
             itemView.setOnClickListener(this);
         }
 
         @Override
         public void onClick(View v) {
-
             final Context context;
             context=v.getContext();
             int pos=getAdapterPosition();
-            Location l= mDataset.get(pos);
-            String path="http://maps.google.com/maps?f=d&daddr="+l.getLat()+","+l.getLon();
-
+            RouteObject r= mDataset.get(pos);
+            String path="http://maps.google.com/maps?saddr="+r.getStart().getLat()+","+r.getStart().getLon()+"&daddr="+r.getEnd().getLat()+","+r.getEnd().getLon();
+            if(r.getStart().getName().contentEquals("Your Location"))
+                 path="http://maps.google.com/maps?f=d&daddr="+r.getEnd().getLat()+","+r.getEnd().getLon();
             Intent intent = new Intent(android.content.Intent.ACTION_VIEW,
                     Uri.parse(path));
             context.startActivity(intent);
-
-
         }
-
     }
 
     public void setOnItemClickListener(MyClickListener myClickListener) {
-        MyRecyclerViewAdapterLocate.myClickListener = myClickListener;
+        MyRecyclerViewAdapterRoute.myClickListener = myClickListener;
     }
 
-    public MyRecyclerViewAdapterLocate(ArrayList<Location> myDataset) {
+    public MyRecyclerViewAdapterRoute (ArrayList<RouteObject> myDataset) {
         mDataset = myDataset;
     }
 
@@ -66,7 +65,7 @@ public class MyRecyclerViewAdapterLocate extends RecyclerView
     public DataObjectHolder onCreateViewHolder(ViewGroup parent,
                                                int viewType) {
         View view = LayoutInflater.from(parent.getContext())
-                .inflate(R.layout.card_view_location, parent, false);
+                .inflate(R.layout.card_route_path, parent, false);
 
         DataObjectHolder dataObjectHolder = new DataObjectHolder(view);
         return dataObjectHolder;
@@ -74,14 +73,12 @@ public class MyRecyclerViewAdapterLocate extends RecyclerView
 
     @Override
     public void onBindViewHolder(DataObjectHolder holder, int position) {
-        holder.locationName.setText(mDataset.get(position).getName());
+        holder.textno.setText(String.valueOf(position + 1));
+        holder.textSource.setText(mDataset.get(position).getStart().getName());
+        holder.textDestination.setText(mDataset.get(position).getEnd().getName());
     }
 
-    public static MyClickListener getMyClickListener() {
-        return myClickListener;
-    }
-
-    public void addItem(Location dataObj, int index) {
+    public void addItem(RouteObject dataObj, int index) {
         mDataset.add(index, dataObj);
         notifyItemInserted(index);
     }

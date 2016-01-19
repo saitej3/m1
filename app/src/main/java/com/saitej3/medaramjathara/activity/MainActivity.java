@@ -33,7 +33,6 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
     private Toolbar mToolbar;
     private FragmentDrawer drawerFragment;
-//gcm
     ConnectionDetector cd;
     public static String name;
     public static String email;
@@ -44,7 +43,6 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     GoogleCloudMessaging gcm;
     Context context;
     String regid;
-//gcm end
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +65,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             Toast.makeText(this,
                     "Internet Connection Error",
                     Toast.LENGTH_SHORT);
+            displayView(0);
             return;
         }
 
@@ -102,18 +101,11 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
 
+        int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
-            return true;
-        }
-
-        if(id == R.id.action_search){
-            Toast.makeText(getApplicationContext(), "Search action is selected!", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(this,LangActivity.class));
             return true;
         }
 
@@ -134,23 +126,28 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 title = getString(R.string.title_events);
                 break;
             case 1:
+                fragment=new RoutesFragment();
+                title=getString(R.string.title_routes);
+                break;
+
+            case 2:
                     startActivity(new Intent(this,MapsActivity.class));
 //                fragment = new ParkingFragment();
 //                title = getString(R.string.title_parking);
                 break;
-            case 2:
+            case 3:
                 fragment = new EmergencyFragment();
                 title = getString(R.string.title_emergency);
                 break;
-            case 3:
+            case 4:
                 fragment = new NotificationsFragment();
                 title = getString(R.string.title_notifications);
                 break;
-            case 4:
+            case 5:
                 fragment = new SavedLocationsFragment();
                 title = getString(R.string.title_location);
                 break;
-            case 5:
+            case 6:
                 fragment = new AboutFragment();
                 title = getString(R.string.title_about);
                 break;

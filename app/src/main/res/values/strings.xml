@@ -1,37 +1,56 @@
 <resources>
     <string name="app_name">Medaram Jathara</string>
-    <string name="action_settings">Settings</string>
-    <string name="action_search">Search</string>
+    <string name="action_language">Change Language</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 
     <!-- navigation drawer item labels  -->
     <string-array name="nav_drawer_labels">
         <item>@string/title_events</item>
+        <item>@string/title_routes</item>
         <item>@string/title_parking</item>
         <item>@string/title_emergency</item>
         <item>@string/title_notifications</item>
         <item>@string/title_location</item>
         <item>@string/title_about</item>
+    </string-array>
 
+    <string-array name="phonenum">
+        <item>7794879899</item>
+        <item>7794879899</item>
+        <item>7794879899</item>
+        <item>7794879899</item>
+        <item>7794879899</item>
+        <item>7794879899</item>
+        <item>7794879899</item>
+        <item>7794879899</item>
+        <item>7794879899</item>
+        <item>7794879899</item>
     </string-array>
 
     <!-- navigation drawer icons -->
     <array name="nav_drawer_icons">
         <item>@drawable/ic_action_event</item>
+        <item>@drawable/ic_action_routes</item>
         <item>@drawable/ic_action_maps</item>
         <item>@drawable/ic_action_emergency</item>
         <item>@drawable/ic_action_notification</item>
         <item>@drawable/ic_action_location</item>
         <item>@drawable/ic_action_about</item>
     </array>
-
-
-    <string name="title_events">Events</string>
+    
+    <string name="title_events">Schedule</string>
+    <string name="title_routes">Routes</string>
     <string name="title_parking">Parking</string>
     <string name="title_emergency">Emergency</string>
     <string name="title_notifications">Notifications</string>
     <string name="title_location">Saved Locations</string>
     <string name="title_about">About</string>
 
+    <string name="day1"> Medaram Jathara is celebrated as the arrival of Saralamma on to the ‘Medaram Gaddhe’ (Platform). Saralamma was the daughter of Sarakka. Saralamma is installed in a temple at Kannepalli, a small village near Medaram On 12 February 2014, in the morning pujaris perform pujas secretly. The unmarried women and men, those who want to have children and those who are suffering from diseases perform special pujas to Saralamma on this day The villages of Kannepalli perform ‘Aarti’ and organize grand farewell to Saralamma. From there, the idol of Saralamma is brought to Medaram Gaddhe through ‘Jampanna Vaagu’ (a small canal named after Jampanna) After arriving on to the ‘Gaddhe’ Saralamma is worshipped with special pujas and other rituals. More than 3 million devotees visit Saralamma and offer special pujas as a part of Medaram Jathara.</string>
+    <string name="day2">2nd day of Medaram Jatara is celebrated as the arrival of Sammakka on to the ‘Medaram Gaddhe’ (Platform). Sammakka is welcomed amidst the official homage from police and government. ‘Edurukolla Ghattam’ is one of the popular events during the arrival of Sarakka.On 18 February 2016, pujaris bring bamboo sticks and place them on the ‘Gaddhe’. Amdist the protection and official homages of police, Pujaris bring Sammakka to Gaddhe (Sammakka is usually installed at Chilukala Gutta in the form of a ‘Kumkuma Bharina’). Sammakka is the presiding deity of Medaram Sammakka Saralamma Jathara At Chilukala Gutta, as the indication of the arrival of Sammakka, the district SP (Superintendent of Police) fires his gun thrice in the air and inaugurates the ‘bali’ to please Sammakka. Amidst the slogans praising Sammakka, pujaris bring the deity on to Gaddhe.</string>
+    <string name="day3">3rd day of Medaram Jathara, Sammakka Saralamma darshanam is available devotees. After performing Punya Snanams in ‘Jampanna Vaagu’, devotees visit the Goddesses. Devotees offer various offerings to Sammakka Saralamma. In 2016, sammakka sarakka darshanam date is February 19. Women offer ‘Odi Biyyam’ (sacred rice) and ‘saare’ (combination of necessary items in daily items) to the Goddesses. Third day is the busiest one among the four festival days.The important offering in Sammakka Sarakka Jathara is ‘Bangaram’ (bellam, the Gold). Jaggery is offered as gold to the Goddesses.</string>
+    <string name="day4"> Last the 4th day of Medaram Jathara is celebrated as Vana Pravesham of Sammakka and Sarakka. After getting worshipped by millions of devotees, devatas return back to forest. It marks the conclusion of 4-day Sammakka Saralamma Jathara.The same security and the official homage they have got while arriving on to the platform are paid to the Goddesses while returning into the forest (Vana Pravesham).</string>
+
+    <string name="about_info">The Goddesses Sri Sammakka – Saralamma temple is situated at Medaram village of SS Tadvai mandal in Warangal district of Telangana state. The Medaram Jathara is a biennial tribal fair and it commemorates the fight of a mother and daughter, Sammakka and Saralamma, with the reigning rulers against an unjust law. It is believed that after Kumbha Mela, the Medaram jatara attracts the largest number of devotees in the country. An estimated more than 10 million people gathered in 2014. It is celebrated in Medaram during the time the goddesses of the tribals is believed to visit them.</string>
 </resources>

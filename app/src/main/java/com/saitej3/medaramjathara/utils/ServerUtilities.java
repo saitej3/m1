@@ -23,24 +23,22 @@ public final class ServerUtilities {
 
 
     public static void register(final Context context, String name, String email, final String regId) {
-        String serverUrl = "http://androidconnect.16mb.com/gcm_server_php/gcm_server_php/register.php";
+        //String serverUrl = "http://androidconnect.16mb.com/gcm_server_php/gcm_server_php/register.php";
+        String serverUrl = "http://wsdc.nitw.ac.in/medaramweb/dashboard/notify/insertgcmid";
         Map<String, String> params = new HashMap<String, String>();
-        params.put("regId", regId);
+        //params.put("regId", regId);
+        params.put("gcmid",regId);
         params.put("name", name);
         params.put("email", email);
         
         long backoff = BACKOFF_MILLI_SECONDS + random.nextInt(1000);
-        // Once GCM returns a registration id, we need to register on our server
-        // As the server might be down, we will retry it a couple
-        // times.
+
         for (int i = 1; i <= MAX_ATTEMPTS; i++) {
             try {
                 post(serverUrl, params);
                 return;
             } catch (IOException e) {
-                // Here we are simplifying and retrying on any error; in a real
-                // application, it should retry only on unrecoverable errors
-                // (like HTTP error code 503).
+
                 if (i == MAX_ATTEMPTS) {
                     break;
                 }

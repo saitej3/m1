@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.saitej3.medaramjathara" >
 
+
+    <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
@@ -13,11 +15,7 @@
         android:protectionLevel="signature" />
     <uses-permission android:name="com.saitej3.medaramjathara.permission.C2D_MESSAGE" />
 
-    <!--
-         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
-         Google Maps Android API v2, but you must specify either coarse or fine
-         location permissions for the 'MyLocation' functionality.
-    -->
+
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -59,13 +57,22 @@
         <activity
             android:name="com.saitej3.medaramjathara.activity.MainActivity"
             android:label="@string/app_name" >
+        </activity>
+
+        <activity
+            android:name="com.saitej3.medaramjathara.activity.SplashActivity"
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
+        <activity
+            android:name="com.saitej3.medaramjathara.activity.LangActivity"
+            android:label="@string/Lang"
+            android:configChanges="locale|orientation">
+        </activity>
 
         <activity
             android:name=".MapsActivity"

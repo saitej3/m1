@@ -4,21 +4,14 @@
     android:background="@android:color/white">
 
 
-    <RelativeLayout
+    <ImageView
         android:id="@+id/nav_header_container"
         android:layout_width="match_parent"
+        android:src="@drawable/godphoto_nav"
         android:layout_height="140dp"
-        android:layout_alignParentTop="true"
-        android:background="@color/colorPrimary">
+        android:layout_alignParentTop="true">
 
-        <ImageView
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:src="@drawable/ic_profile"
-            android:scaleType="fitCenter"
-            android:layout_centerInParent="true" />
-
-    </RelativeLayout>
+    </ImageView>
 
 
     <android.support.v7.widget.RecyclerView

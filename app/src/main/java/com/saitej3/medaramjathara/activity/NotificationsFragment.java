@@ -3,23 +3,17 @@ package com.saitej3.medaramjathara.activity;
 import android.app.Activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v7.widget.CardView;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.saitej3.medaramjathara.DataBase.DataBaseHandler;
 import com.saitej3.medaramjathara.R;
-import com.saitej3.medaramjathara.adapter.MyRecyclerViewAdapter;
 import com.saitej3.medaramjathara.adapter.MyRecyclerViewAdapterNotify;
-import com.saitej3.medaramjathara.model.DataObject;
-import com.saitej3.medaramjathara.model.Location;
 
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class NotificationsFragment extends Fragment {

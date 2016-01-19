@@ -6,33 +6,48 @@
     android:id="@+id/rel_lay">
 
     <ImageView
-        android:id="@+id/nitwlogo"
+        android:id="@+id/godphoto"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="90dp"
-        android:src="@drawable/nitwlogo" />
+        android:layout_marginTop="80dp"
+        android:src="@drawable/godphoto" />
 
     <TextView
         android:id="@+id/powered"
-        android:text="Powered"
+        android:text="Powered By"
         android:textSize="20sp"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="230dp"
+        android:layout_marginBottom="230dp"
+        android:layout_alignParentBottom="true"
         android:visibility="gone"
         />
     <ImageView
-        android:id="@+id/godphoto"
+        android:id="@+id/wl_pd"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:src="@drawable/godphoto"
-        android:layout_marginBottom="83dp"
-        android:layout_alignParentBottom="true"
+        android:src="@drawable/wlpd"
         android:visibility="gone"
-        android:layout_centerHorizontal="true" />
+        android:layout_marginBottom="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="60dp"
+        />
 
+    <ImageView
+        android:id="@+id/nitwlogo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/nitwlogo"
+        android:visibility="gone"
+        android:layout_marginBottom="80dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="60dp"
+        android:layout_marginEnd="60dp"/>
 
 </RelativeLayout>
