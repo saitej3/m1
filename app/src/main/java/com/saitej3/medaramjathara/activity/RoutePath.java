@@ -46,9 +46,9 @@ public class RoutePath extends Fragment {
             {
                 case 1:  waypoints=new ArrayList<>(Arrays.asList("Your Location","Tadvai","Medaram Jathara"));
                             break;
-                case 2:  waypoints=new ArrayList<>(Arrays.asList("Your Location","Tadvai","Medaram Jathara"));
+                case 2:  waypoints=new ArrayList<>(Arrays.asList("Your Location","Jangalpally","Tadvai","Medaram Jathara"));
                     break;
-                case 3:  waypoints=new ArrayList<>(Arrays.asList("Your Location","Tadvai","Medaram Jathara"));
+                case 3:  waypoints=new ArrayList<>(Arrays.asList("Your Location","Mahabubabad","Narsampet","Tadvai","Medaram Jathara"));
                     break;
                 case 4:  waypoints=new ArrayList<>(Arrays.asList("Your Location","Tadvai","Medaram Jathara"));
                     break;
@@ -59,7 +59,7 @@ public class RoutePath extends Fragment {
         {
             switch (myInt)
             {
-                case 1: waypoints=new ArrayList<>(Arrays.asList("Your Location","Medaram Jathara"));
+                case 1: waypoints=new ArrayList<>(Arrays.asList("Your Location","Kamalapur x road","Medaram Jathara"));
                     break;
                 case 2:waypoints=new ArrayList<>(Arrays.asList("Your Location","Medaram Jathara"));
                     break;

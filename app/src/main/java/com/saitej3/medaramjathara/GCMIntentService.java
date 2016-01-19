@@ -51,7 +51,8 @@ public class GCMIntentService extends GcmListenerService {
         NotificationCompat.Builder mBuilder =
                 (NotificationCompat.Builder) new NotificationCompat.Builder(this)
                         .setSmallIcon(R.mipmap.ic_marker_temple)
-                        .setContentTitle("mapsnew")
+                        .setStyle(new NotificationCompat.BigTextStyle().bigText(message))
+                        .setContentTitle("Medaram Jathara")
                         .setContentText(message);
         Intent resultIntent = new Intent(this, MainActivity.class);
 
