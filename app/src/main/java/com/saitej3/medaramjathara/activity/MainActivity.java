@@ -99,22 +99,6 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         return true;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-
-        int id = item.getItemId();
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            SharedPreferences sharedPref = getPreferences(Context.MODE_MULTI_PROCESS);
-            SharedPreferences.Editor editor = sharedPref.edit();
-            editor.putInt("value",-1);
-            editor.commit();
-            startActivity(new Intent(this,LangActivity.class));
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     @Override
     public void onDrawerItemSelected(View view, int position) {

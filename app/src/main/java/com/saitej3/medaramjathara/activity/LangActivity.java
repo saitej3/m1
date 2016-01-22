@@ -30,13 +30,13 @@ public class LangActivity extends Activity  implements CardView.OnClickListener{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_lang);
-        SharedPreferences sharedPref = getPreferences(Context.MODE_MULTI_PROCESS);
+        SharedPreferences sharedPref = getPreferences(Context.MODE_PRIVATE);
         if(sharedPref.getInt("value",-1)==1)
         {
             Log.d("string","new activity started");
             Intent refresh = new Intent(this, MainActivity.class);
             startActivity(refresh);
-            //LangActivity.this.finish();
+            LangActivity.this.finish();
         }
         else
         {

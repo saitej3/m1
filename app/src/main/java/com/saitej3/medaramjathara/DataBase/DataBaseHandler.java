@@ -70,8 +70,8 @@ public class DataBaseHandler extends SQLiteOpenHelper {
 
         execInsert(db,11, "Helipad at Medaram", "80.241976", "18.318956");
         execInsert(db,12, "VIP  Parking Place", "80.248239", "18.308466");
-        execInsert(db,13, "Chintal 'X' road Parking Place 2", "80.208382", "18.297904");
-        execInsert(db,14, "Chintal 'X' road Parking Place 1", "80.207901", "18.298847");
+        execInsert(db,13, "Chintal X road Parking Place 2", "80.208382", "18.297904");
+        execInsert(db,14, "Chintal X road Parking Place 1", "80.207901", "18.298847");
         execInsert(db,15, "Aremalla Gutta Parking Place", "80.207206", "18.290028");
         execInsert(db,16, "Erra Cheruvu Parking Place 1", "80.207543", "18.284121");
         execInsert(db,17, "Erra Cheruvu Parking Place 2", "80.206608", "18.279084");
@@ -79,10 +79,10 @@ public class DataBaseHandler extends SQLiteOpenHelper {
         execInsert(db,19, "VVIP Parking Place", "80.244183", "18.318038");
         execInsert(db,20, "Vengalapur Parking Place", "80.203632", "18.269525");
         execInsert(db,21, "Ballani Chintal Parking Place", "80.20187", "18.264437");
-        execInsert(db,22, "Kalvapally 'X' Road Parking Place 2", "80.209746", "18.315459");
+        execInsert(db,22, "Kalvapally X Road Parking Place 2", "80.209746", "18.315459");
         execInsert(db,23, "Kannepally Parking Place", "80.226724", "18.330212");
         execInsert(db,24, "Bayyakkapet Parking Place", "80.199724", "18.315164");
-        execInsert(db,25, "Kalvapally 'X' road Parking Place 1", "80.21015200000001", "18.318128");
+        execInsert(db,25, "Kalvapally X road Parking Place 1", "80.21015200000001", "18.318128");
         execInsert(db,26, "Jampanna Vai Parking Place", "80.226304", "18.329196");
         execInsert(db,27, "Manasura Parking Place", "80.223382", "18.326562");
         execInsert(db,28, "Kalvapally check post", "80.210512", "18.319158");
