@@ -91,12 +91,10 @@ public class SplashActivity extends Activity {
 
 
 
-
-
         /* New Handler to start the Menu-Activity
          * and close this Splash-Screen after some seconds.*/
         /* Duration of wait */
-        int SPLASH_DISPLAY_LENGTH = 4000;
+        int SPLASH_DISPLAY_LENGTH = 3000;
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {

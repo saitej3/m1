@@ -105,6 +105,10 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         int id = item.getItemId();
         //noinspection SimplifiableIfStatement
         if (id == R.id.action_settings) {
+            SharedPreferences sharedPref = getPreferences(Context.MODE_MULTI_PROCESS);
+            SharedPreferences.Editor editor = sharedPref.edit();
+            editor.putInt("value",-1);
+            editor.commit();
             startActivity(new Intent(this,LangActivity.class));
             return true;
         }
@@ -131,9 +135,11 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 break;
 
             case 2:
-                    startActivity(new Intent(this,MapsActivity.class));
-//                fragment = new ParkingFragment();
-//                title = getString(R.string.title_parking);
+                Intent intent= new Intent(this,MapsActivity.class);
+                Bundle extra = new Bundle();
+                extra.putString("action","main");
+                intent.putExtras(extra);
+                startActivity(intent);
                 break;
             case 3:
                 fragment = new EmergencyFragment();

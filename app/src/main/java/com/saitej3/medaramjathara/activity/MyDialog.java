@@ -44,9 +44,6 @@ public class MyDialog extends DialogFragment implements View.OnClickListener{
         ok=(Button)v.findViewById(R.id.ok);
         ok.setOnClickListener(this);
 
-
-
-
         return v;
     }
 

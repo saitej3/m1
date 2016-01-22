@@ -28,7 +28,6 @@
         android:layout_height="40dp"
         android:text="Save Current Location"
         android:id="@+id/saveLocation"
-        android:onClick="showDialog"
         android:layout_marginTop="10dp"
         android:layout_below="@+id/map"
         android:layout_centerHorizontal="true" />

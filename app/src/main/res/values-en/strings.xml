@@ -1,6 +1,5 @@
 <resources>
-    <string name="app_name">Material Design</string>
-    <string name="action_language">Change Language</string>
+    <string name="app_name">Medaram Jathara</string>    <string name="action_language">Change Language</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
 

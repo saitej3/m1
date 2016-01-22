@@ -1,83 +1,80 @@
 package com.saitej3.medaramjathara;
 
-import android.app.FragmentManager;
-import android.app.ProgressDialog;
-import android.content.Intent;
-import android.graphics.Color;
-import android.location.Location;
-import android.net.Uri;
-import android.os.Build;
-import android.support.v4.app.FragmentActivity;
-import android.os.Bundle;
 
-import com.google.android.gms.appindexing.Action;
-import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.location.ActivityRecognition;
-import com.google.android.gms.location.LocationServices;
-import com.google.android.gms.location.places.Places;
-import com.google.android.gms.maps.*;
-import com.google.android.gms.maps.model.*;
+        import android.app.FragmentManager;
+        import android.app.ProgressDialog;
+        import android.location.Location;
+        import android.location.LocationListener;
+        import android.location.LocationManager;
+        import android.net.Uri;
+        import android.os.Bundle;
+        import android.support.v7.app.AppCompatActivity;
+        import android.util.Log;
+        import android.view.View;
+        import android.widget.Button;
+        import android.widget.Toast;
 
-import android.support.v7.widget.Toolbar;
-import android.util.Log;
-import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Toast;
+        import com.google.android.gms.appindexing.Action;
+        import com.google.android.gms.appindexing.AppIndex;
+        import com.google.android.gms.common.ConnectionResult;
+        import com.google.android.gms.common.api.GoogleApiClient;
+        import com.google.android.gms.location.ActivityRecognition;
+        import com.google.android.gms.location.LocationServices;
+        import com.google.android.gms.location.places.Places;
+        import com.google.android.gms.maps.CameraUpdate;
+        import com.google.android.gms.maps.CameraUpdateFactory;
+        import com.google.android.gms.maps.GoogleMap;
+        import com.google.android.gms.maps.MapsInitializer;
+        import com.google.android.gms.maps.SupportMapFragment;
+        import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+        import com.google.android.gms.maps.model.LatLng;
+        import com.google.android.gms.maps.model.Marker;
+        import com.google.android.gms.maps.model.MarkerOptions;
+        import com.google.android.gms.maps.model.Polyline;
+        import com.google.android.gms.maps.model.PolylineOptions;
+        import com.google.maps.android.kml.KmlLayer;
+        import com.saitej3.medaramjathara.DataBase.DataBaseHandler;
+        import com.saitej3.medaramjathara.activity.MyDialog;
+        import com.saitej3.medaramjathara.helper.AbstractRouting;
+        import com.saitej3.medaramjathara.helper.Route;
+        import com.saitej3.medaramjathara.helper.Routing;
+        import com.saitej3.medaramjathara.helper.RoutingListener;
+        import com.saitej3.medaramjathara.model.MarkerItem;
 
+        import org.xmlpull.v1.XmlPullParserException;
 
-import com.google.android.gms.maps.CameraUpdateFactory;
-import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.LatLng;
-import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.maps.android.kml.KmlLayer;
-import com.saitej3.medaramjathara.DataBase.DataBaseHandler;
-import com.saitej3.medaramjathara.activity.MyDialog;
-import com.saitej3.medaramjathara.helper.AbstractRouting;
-import com.saitej3.medaramjathara.helper.Route;
-import com.saitej3.medaramjathara.helper.Routing;
-import com.saitej3.medaramjathara.helper.RoutingListener;
-import com.saitej3.medaramjathara.model.MarkerItem;
+        import java.io.IOException;
+        import java.util.ArrayList;
+        import java.util.List;
 
-import org.xmlpull.v1.XmlPullParserException;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-
-import static android.support.v4.app.ActivityCompat.startActivity;
-
-public class MapsActivity extends FragmentActivity implements RoutingListener,GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks,MyDialog.Communicator {
+public class MapsActivity extends AppCompatActivity implements RoutingListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks,MyDialog.Communicator,Button.OnClickListener{
+    protected GoogleMap map;
     protected ArrayList<MarkerItem>markers;
     protected ArrayList<MarkerItem>markerscamp;
     protected ArrayList<MarkerItem>markerstemple;
     protected ArrayList<MarkerItem>markersplaces;
-    protected GoogleMap map;
-    protected GoogleApiClient mGoogleApiClient;
-    protected LatLng start;
+    protected LatLng start,inter;
     protected LatLng end;
-    private Polyline polyline;
+    private String LOG_TAG = "MyActivity";
+    protected GoogleApiClient mGoogleApiClient;
     private ProgressDialog progressDialog;
+    private Polyline polyline;
+    Button saveLocation;
+    ArrayList<LatLng> arr;
+    //request location
+    protected LocationManager locationManager;
+    protected LocationListener locationListener;
+    Location mLastLocation;
+    Button button1;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        requestWindowFeature(Window.FEATURE_NO_TITLE);
-        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_maps);
 
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-            Window window = getWindow();
-            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
-            window.clearFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            //window.setStatusBarColor(getResources().getColor(R.color.myPrimaryDarkColor));
-        }
+        saveLocation= (Button) findViewById(R.id.saveLocation);
+        saveLocation.setOnClickListener(this);
         // ATTENTION: This "addApi(AppIndex.API)"was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         mGoogleApiClient = new GoogleApiClient.Builder(this)
@@ -87,7 +84,6 @@ public class MapsActivity extends FragmentActivity implements RoutingListener,Go
                 .addApi(ActivityRecognition.API)
                 .addOnConnectionFailedListener(this)
                 .addApi(AppIndex.API).build();
-
 
         MapsInitializer.initialize(this);
         mGoogleApiClient.connect();
@@ -101,28 +97,50 @@ public class MapsActivity extends FragmentActivity implements RoutingListener,Go
         map = mapFragment.getMap();
 
         CameraUpdate center = CameraUpdateFactory.newLatLng(new LatLng(18.32328, 80.215589));
-        CameraUpdate zoom = CameraUpdateFactory.zoomTo(12);
+        CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
         map.moveCamera(center);
         map.animateCamera(zoom);
 
+        Bundle extras = getIntent().getExtras();
+        if (extras.getString("action").contentEquals("main")) {
+            try {
+                KmlLayer layer = new KmlLayer(map, R.raw.map_onlylines, getApplicationContext());
+                layer.addLayerToMap();
+            } catch (XmlPullParserException e) {
+                Log.d("XmlParser", "Problem with xml parsing");
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
-
-        try {
-            KmlLayer layer=new KmlLayer(map,R.raw.map_onlylines,getApplicationContext());
-            layer.addLayerToMap();
+            addMarkers();
         }
-        catch (XmlPullParserException e) {
-            Log.d("XmlParser","Problem with xml parsing");
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+
+
+        if (extras.getString("action").contentEquals("route")) {
+            saveLocation.setText("Get Route from my Location");
+            ArrayList<String> arrways = extras.getStringArrayList("route");
+            ArrayList<com.saitej3.medaramjathara.model.Location> arr1 = new ArrayList<>();
+            DataBaseHandler db = new DataBaseHandler(this);
+            for (String place : arrways) {
+                arr1.add(db.getLocationByName(place));
+            }
+
+
+            arr = new ArrayList<>();
+            inter = new LatLng(17.597458, 80.001623);
+            start = new LatLng(18.235364, 80.315217);
+            end = new LatLng(18.321168, 80.241647);
+            arr.add(inter);
+            arr.add(start);
+            arr.add(end);
+            route(arr1);
+            //route(arr);
         }
 
-        addMarkers();
 
 
     }
-
 
     public void addMarkers() {
 
@@ -246,84 +264,52 @@ public class MapsActivity extends FragmentActivity implements RoutingListener,Go
             MarkerMain.add(m);
         }
 
-        //adding drag listener to call on route function on long click
-        /*
-        map.setOnMarkerDragListener(new GoogleMap.OnMarkerDragListener() {
-            @Override
-            public void onMarkerDragStart(Marker marker) {
-                route(marker.getPosition());
-            }
-
-            @Override
-            public void onMarkerDrag(Marker marker) {
-
-            }
-
-            @Override
-            public void onMarkerDragEnd(Marker marker) {
-
-            }
-        });
-
-        */
-
-
     }
 
 
-    @Override
-    public void onConnected(Bundle bundle) {
-
-    }
-
-    @Override
-    public void onConnectionSuspended(int i) {
-
-    }
-
-    @Override
-    public void onConnectionFailed(ConnectionResult connectionResult) {
-
-    }
-
-    public void route(LatLng l)
+    public void route(ArrayList<com.saitej3.medaramjathara.model.Location> arr)
     {
-        Location mLastLocation= LocationServices.FusedLocationApi.getLastLocation(mGoogleApiClient);
+        ArrayList<LatLng> waypoints=new ArrayList<>();
+        for(com.saitej3.medaramjathara.model.Location l:arr)
+        {
+            map.addMarker(new MarkerOptions().position(new LatLng(Double.valueOf(l.getLat()), Double.valueOf(l.getLon()))).title(l.getName()));
+            LatLng latLng=new LatLng(Double.valueOf(l.getLat()),Double.valueOf(l.getLon()));
+            waypoints.add(latLng);
+        }
 
-        if(mLastLocation!= null)
-            start=new LatLng(mLastLocation.getLatitude(),mLastLocation.getLongitude());
+        end=waypoints.get(waypoints.size() - 1);
+        mGoogleApiClient.connect();
 
-        Marker marker=map.addMarker(new MarkerOptions().position(start).title("You Are Here"));
-        end=l;
-        Log.d("lat cordinate", String.valueOf(end.latitude));
-        Log.d("long cordinate", String.valueOf(end.longitude));
+
+        //Marker marker=map.addMarker(new MarkerOptions().position(start).title("You Are Here"));
         progressDialog = ProgressDialog.show(this, "Please wait.",
                 "Fetching  Information.", true);
-
+        // waypoints.add(0,start);
         Routing routing = new Routing.Builder()
                 .travelMode(AbstractRouting.TravelMode.DRIVING)
                 .withListener(this)
-                .waypoints(start, end)
+                .waypoints(waypoints)
                 .build();
         routing.execute();
     }
+
 
 
     @Override
     public void onRoutingFailure() {
         progressDialog.dismiss();
         Toast.makeText(this, "Something went wrong, Try again", Toast.LENGTH_SHORT).show();
-
     }
 
     @Override
     public void onRoutingStart() {
-
+        // The Routing Request starts
     }
 
-    @Override
-    public void onRoutingSuccess(PolylineOptions mPolyOptions, Route route) {
 
+    @Override
+    public void onRoutingSuccess(PolylineOptions mPolyOptions, Route route)
+    {
         progressDialog.dismiss();
         CameraUpdate center = CameraUpdateFactory.newLatLng(start);
         CameraUpdate zoom = CameraUpdateFactory.zoomTo(16);
@@ -345,19 +331,34 @@ public class MapsActivity extends FragmentActivity implements RoutingListener,Go
         // Start marker
         MarkerOptions options = new MarkerOptions();
         options.position(start);
+        //options.icon(BitmapDescriptorFactory.fromResource(R.drawable.start_blue));
         map.addMarker(options);
 
         // End marker
         options = new MarkerOptions();
         options.position(end);
+        //options.icon(BitmapDescriptorFactory.fromResource(R.drawable.end_green));
         map.addMarker(options);
-
     }
 
     @Override
     public void onRoutingCancelled() {
 
-        Log.i("op", "Operation was cancelled.");
+        Log.i(LOG_TAG, "Operation was cancelled.");
+    }
+
+    @Override
+    public void onConnectionFailed(ConnectionResult connectionResult) {
+
+        Log.v(LOG_TAG, connectionResult.toString());
+    }
+
+    @Override
+    public void onConnected(Bundle bundle) {
+    }
+
+    @Override
+    public void onConnectionSuspended(int i) {
 
     }
 
@@ -374,7 +375,6 @@ public class MapsActivity extends FragmentActivity implements RoutingListener,Go
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
         store(message);
     }
-
     public void store(String message)
     {
         LatLng currLocation=null;
@@ -437,9 +437,50 @@ public class MapsActivity extends FragmentActivity implements RoutingListener,Go
         AppIndex.AppIndexApi.end(mGoogleApiClient, viewAction);
         mGoogleApiClient.disconnect();
     }
+
+    @Override
+    public void onClick(View view) {
+
+        if(getIntent().getExtras().getString("action").contentEquals("main"))
+        {
+            showDialog(view);
+            return;
+        }
+        if(getIntent().getExtras().getString("action").contentEquals("route"))
+        {
+            Log.d("string", "came here");
+            function();
+            return;
+        }
+    }
+
+
+    public void function()
+    {
+        Location mLastLocation = LocationServices.FusedLocationApi
+                .getLastLocation(mGoogleApiClient);
+
+        if (mLastLocation != null) {
+            start = new LatLng(mLastLocation.getLatitude(), mLastLocation.getLongitude());
+        }
+
+        Log.d("lat cordinate", String.valueOf(start.latitude));
+        Log.d("long cordinate", String.valueOf(start.longitude));
+        ArrayList<String> arrways = getIntent().getExtras().getStringArrayList("route");
+        ArrayList<com.saitej3.medaramjathara.model.Location> arr1 = new ArrayList<>();
+        DataBaseHandler db = new DataBaseHandler(this);
+        for (String place : arrways) {
+            arr1.add(db.getLocationByName(place));
+        }
+        arr1.remove(0);
+        com.saitej3.medaramjathara.model.Location l=new com.saitej3.medaramjathara.model.Location();
+        l.setName("You are Here");
+        l.setLat(String.valueOf(start.latitude));
+        l.setLon(String.valueOf(start.longitude));
+        arr1.add(0,l);
+        route(arr1);
+    }
 }
-
-
 
 
 
