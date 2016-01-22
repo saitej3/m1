@@ -43,6 +43,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     GoogleCloudMessaging gcm;
     Context context;
     String regid;
+    int navno;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -108,6 +109,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
     private void displayView(int position) {
         Fragment fragment = null;
         String title = getString(R.string.app_name);
+        navno=position;
         switch (position) {
             case 0:
                 fragment = new EventsFragment();
@@ -155,6 +157,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
             // set the toolbar title
             getSupportActionBar().setTitle(title);
         }
+
     }
 
 
@@ -245,5 +248,17 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
         }
     }
 
-
+    @Override
+    public void onBackPressed() {
+        Log.d("number", String.valueOf(navno));
+        Log.d("pressed","baccccccck");
+        if(navno==0)
+        {
+            finish();
+        }
+        else
+        {
+            displayView(0);
+        }
+    }
 }
