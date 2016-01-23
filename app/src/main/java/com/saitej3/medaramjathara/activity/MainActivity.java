@@ -191,7 +191,6 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                     .getPackageInfo(context.getPackageName(), 0);
             return packageInfo.versionCode;
         } catch (PackageManager.NameNotFoundException e) {
-            // should never happen
             throw new RuntimeException("Could not get package name: " + e);
         }
     }
@@ -231,7 +230,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 }
                 regid = gcm.register(SENDER_ID);
                 msg = "Device registered, registration ID=" + regid;
-
+                Log.d("regid",regid);
 
                 sendRegistrationIdToBackend();
 
@@ -250,8 +249,7 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
 
     @Override
     public void onBackPressed() {
-        Log.d("number", String.valueOf(navno));
-        Log.d("pressed","baccccccck");
+
         if(navno==0)
         {
             finish();

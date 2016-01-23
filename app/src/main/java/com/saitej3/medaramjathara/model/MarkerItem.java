@@ -8,6 +8,7 @@ public class MarkerItem {
     int markerId;
     String name;
     double lat, lon;
+    int status;
 
     public MarkerItem()
     {
@@ -20,6 +21,16 @@ public class MarkerItem {
         this.lat =lat;
         this.lon = lon;
     }
+
+    public MarkerItem(int markerId,String name,double lon,double lat,int status)
+    {
+        this.markerId=markerId;
+        this.name = name;
+        this.lat =lat;
+        this.lon = lon;
+        this.status=status;
+    }
+
 
     public int getMarkerId(){return markerId;}
     public void setMarkerId(int num){this.markerId=num;}
@@ -35,10 +46,15 @@ public class MarkerItem {
 
     public double getLon(){return lon;}
     public void setLon(double num){this.lon =num;}
-//
-//    public String getType(){return type;}
-//
-//    public void setType(String type) {
-//        this.type = type;
-//    }
+
+    public int getStatus()
+    {
+        return status;
+    }
+
+    public void setStatus(int status)
+    {
+        this.status=status;
+    }
+
 }

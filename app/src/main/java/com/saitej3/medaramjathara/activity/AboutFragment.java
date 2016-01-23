@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.saitej3.medaramjathara.DataBase.DataBaseHandler;
 import com.saitej3.medaramjathara.R;
 import com.saitej3.medaramjathara.model.Location;
+import com.saitej3.medaramjathara.model.MarkerItem;
 
 
 public class AboutFragment extends Fragment {
@@ -26,14 +27,26 @@ public class AboutFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        DataBaseHandler db=new DataBaseHandler(getActivity());
+        MarkerItem markerItem=db.getMarker(38);
+        Log.d("markeritem",markerItem.getName());
+        Log.d("markeritem", String.valueOf(markerItem.getLat()));
+        Log.d("markeritem", String.valueOf(markerItem.getLon()));
+        Log.d("markeritem", String.valueOf(markerItem.getStatus()));
 
+        db.updateMarker(38, 1);
+
+         markerItem=db.getMarker(38);
+        Log.d("markeritem",markerItem.getName());
+        Log.d("markeritem", String.valueOf(markerItem.getLat()));
+        Log.d("markeritem", String.valueOf(markerItem.getLon()));
+        Log.d("markeritem", String.valueOf(markerItem.getStatus()));
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_about, container, false);
-
 
         return rootView;
     }

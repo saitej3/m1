@@ -49,7 +49,6 @@ package com.saitej3.medaramjathara;
 
 public class MapsActivity extends AppCompatActivity implements RoutingListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks,MyDialog.Communicator,Button.OnClickListener{
     protected GoogleMap map;
-    protected ArrayList<MarkerItem>markers;
     protected ArrayList<MarkerItem>markerscamp;
     protected ArrayList<MarkerItem>markerstemple;
     protected ArrayList<MarkerItem>markersplaces;
@@ -144,33 +143,25 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
     public void addMarkers() {
 
-        markers = new ArrayList<>();
-        markers.add(new MarkerItem(1, "Helipad at Medaram", 80.241976, 18.318956));
-        markers.add(new MarkerItem(2, "VIP  Parking Place", 80.248239, 18.308466));
-        markers.add(new MarkerItem(3, "Chintal 'X' road Parking Place 2", 80.208382, 18.297904));
-        markers.add(new MarkerItem(4, "Chintal 'X' road Parking Place 1", 80.207901, 18.298847));
-        markers.add(new MarkerItem(5, "Aremalla Gutta Parking Place", 80.207206, 18.290028));
-        markers.add(new MarkerItem(6, "Erra Cheruvu Parking Place 1", 80.207543, 18.284121));
-        markers.add(new MarkerItem(7, "Erra Cheruvu Parking Place 2", 80.206608, 18.279084));
-        markers.add(new MarkerItem(8, "Mettugutta Parking Place", 80.188299, 18.238476));
-        markers.add(new MarkerItem(9, "VVIP Parking Place", 80.244183, 18.318038));
-        markers.add(new MarkerItem(10, "Vengalapur Parking Place", 80.203632, 18.269525));
-        markers.add(new MarkerItem(11, "Ballani Chintal Parking Place", 80.20187, 18.264437));
-        markers.add(new MarkerItem(12, "Kalvapally 'X' Road Parking Place 2", 80.209746, 18.315459));
-        markers.add(new MarkerItem(13, "Kannepally Parking Place", 80.226724, 18.330212));
-        markers.add(new MarkerItem(14, "Bayyakkapet Parking Place", 80.199724, 18.315164));
-        markers.add(new MarkerItem(15, "Kalvapally 'X' road Parking Place 1", 80.21015200000001, 18.318128));
-        markers.add(new MarkerItem(16, "Jampanna Vai Parking Place", 80.226304, 18.329196));
-        markers.add(new MarkerItem(17, "Manasura Parking Place", 80.223382, 18.326562));
-        markers.add(new MarkerItem(18, "Kalvapally check post", 80.210512, 18.319158));
-        markers.add(new MarkerItem(19, "Kothur Parking Place - 2", 80.216524, 18.327826));
-        markers.add(new MarkerItem(20, "Thurkani chintal Parking Place", 80.202808, 18.266136));
-        markers.add(new MarkerItem(21, "Pochamma Bandan Parking Place", 80.223198, 18.32606));
-        markers.add(new MarkerItem(22, "Kothur Parking Place - 1", 80.215589, 18.323283));
-        markers.add(new MarkerItem(23, "Kamaram Parking Place", 80.303504, 18.252803));
-        markers.add(new MarkerItem(24, "Oorattam Parking Place-II", 80.232492, 18.338437));
-        markers.add(new MarkerItem(25, "Oorattam Parking Palce-I", 80.232757, 18.338855));
-        markers.add(new MarkerItem(26, "Oorattam Parking Place-III", 80.234059, 18.339005));
+
+        DataBaseHandler db=new DataBaseHandler(this);
+        int parkingmarkers=db.getMarkersCount();
+        for(int i=38;i<=67;i++)
+        {
+            MarkerItem marker =db.getMarker(i);
+            if(marker.getStatus()==0)
+            {
+                map.addMarker(new MarkerOptions().position(new LatLng(marker.getLat(), marker.getLon())).title(marker.getName()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_park1)));
+            }
+            else if(marker.getStatus()==1)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
 
         markerscamp=new ArrayList<>();
         markerscamp.add(new MarkerItem(27,"POLICE CAMPS",80.242738,18.320016));
@@ -239,29 +230,19 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         markersplaces.add(new MarkerItem(85,"Chelpur",79.84268899999999,18.3706343));
         markersplaces.add(new MarkerItem(86,"Bhupalpally",79.8674297,18.438189));
 
-        List<Marker> MarkerMain=new ArrayList<>();
-
-        for (MarkerItem markerItem : markers) {
-            Marker m=map.addMarker(new MarkerOptions().position(new LatLng(markerItem.getLat(), markerItem.getLon())).title(markerItem.getName()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_park1)))  ;
-            MarkerMain.add(m);
-        }
-
         for(MarkerItem markerItem:markerstemple)
         {
             Marker m=map.addMarker(new MarkerOptions().position(new LatLng(markerItem.getLat(), markerItem.getLon())).title(markerItem.getName()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_temple)))  ;
-            MarkerMain.add(m);
         }
 
         for(MarkerItem markerItem:markerscamp)
         {
             Marker m=map.addMarker(new MarkerOptions().position(new LatLng(markerItem.getLat(), markerItem.getLon())).title(markerItem.getName()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_camp)))  ;
-            MarkerMain.add(m);
         }
 
         for(MarkerItem markerItem:markersplaces)
         {
             Marker m=map.addMarker(new MarkerOptions().position(new LatLng(markerItem.getLat(), markerItem.getLon())).title(markerItem.getName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_YELLOW)))  ;
-            MarkerMain.add(m);
         }
 
     }
