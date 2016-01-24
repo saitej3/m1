@@ -8,18 +8,47 @@
         android:id="@+id/nav_header_container"
         android:layout_width="match_parent"
         android:src="@drawable/godphoto_nav"
-        android:layout_height="140dp"
+        android:layout_height="120dp"
         android:layout_alignParentTop="true">
 
     </ImageView>
-
-
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/drawerList"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/nav_header_container"
-        android:layout_marginTop="15dp" />
+        android:orientation="vertical"
+        android:layout_below="@id/nav_header_container">
 
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/drawerList"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="5dp" />
+
+        <ImageView
+            android:id="@+id/giflogo"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:src="@drawable/giphy"
+            android:layout_gravity="center_horizontal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textStyle="bold"
+            android:layout_marginTop="7dp"
+            android:textSize="18sp"
+            android:textColor="@color/navbar_text"
+            android:text="@string/poweredby"
+            android:layout_gravity="center_horizontal" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dp"
+            android:textStyle="bold"
+            android:textColor="@color/navbar_text"
+            android:textSize="18sp"
+            android:text="@string/devby"
+            android:layout_gravity="center_horizontal" />
+    </LinearLayout>
 
 </RelativeLayout>

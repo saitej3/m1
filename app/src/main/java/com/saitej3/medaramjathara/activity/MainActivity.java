@@ -140,10 +140,13 @@ public class MainActivity extends AppCompatActivity implements FragmentDrawer.Fr
                 title = getString(R.string.title_location);
                 break;
             case 6:
-                fragment = new AboutFragment();
-                title = getString(R.string.title_about);
+                fragment = new Trafficfragment();
+                title = getString(R.string.title_traffic);
                 break;
-
+            case 7:
+                fragment = new Policefragment();
+                title = getString(R.string.title_police);
+                break;
             default:
                 break;
         }

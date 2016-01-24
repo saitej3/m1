@@ -1,8 +1,10 @@
 <resources>
-    <string name="app_name">Medaram Jathara</string>    <string name="action_language">Change Language</string>
+    <string name="app_name">Medaram Jathara</string>
+    <string name="action_language">Change Language</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
-
+    <string name="poweredby">Powered by Warangal Police</string>
+    <string name="devby">Developed by NITW</string>
     <!-- navigation drawer item labels  -->
     <string-array name="nav_drawer_labels">
         <item>@string/title_events</item>
@@ -11,7 +13,8 @@
         <item>@string/title_emergency</item>
         <item>@string/title_notifications</item>
         <item>@string/title_location</item>
-        <item>@string/title_about</item>
+        <item>@string/title_traffic</item>
+        <item>@string/title_police</item>
     </string-array>
 
     <!-- navigation drawer icons -->
@@ -22,6 +25,7 @@
         <item>@drawable/ic_action_emergency</item>
         <item>@drawable/ic_action_notification</item>
         <item>@drawable/ic_action_location</item>
+        <item>@drawable/ic_action_about</item>
         <item>@drawable/ic_action_about</item>
     </array>
 

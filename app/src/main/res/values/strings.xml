@@ -3,7 +3,8 @@
     <string name="action_language">Change Language</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
-
+    <string name="poweredby">Powered by Warangal Police</string>
+    <string name="devby">Developed by NITW</string>
     <!-- navigation drawer item labels  -->
     <string-array name="nav_drawer_labels">
         <item>@string/title_events</item>
@@ -12,7 +13,55 @@
         <item>@string/title_emergency</item>
         <item>@string/title_notifications</item>
         <item>@string/title_location</item>
-        <item>@string/title_about</item>
+        <item>@string/title_traffic</item>
+        <item>@string/title_police</item>
+    </string-array>
+
+    <string-array name="traffic_points">
+        <item>"Heavy vehicles movement will be put-off the roads from 1st week of February to avoid traffic congestion"</item>
+        <item>"Pasra-Thadvai –Eturunagaram road has been widened and upgraded to two lane for smooth flow of traffic"></item>
+        <item>"Alternative route at Gattamma Temple (Mulug) for free movement of the vehicles who traditionally stop-over there for a while on the way to Medaram"></item>
+        <item>"Pasra-Narlapur road being made a One-way"></item>
+        <item>"Re-laying of By-pass roads at Culvert points"></item>
+        <item>"Separate routes are made for RTC Buses (Pasra-Thadvai-Medaram) and for Private vehicles (Pasra- Narlapur)"></item>
+        <item>"Parking of the vehicles – More than 27 parking places are identified in nearly 1000 Acres"></item>
+        <item>"More than 12-Holding areas covering 270 Acres identified to have enough buffer space in the event of re-routing or holding the vehicles on the route"</item>
+        <item>"Police Personnel arranged at Check-Posts and Police Out-post to guide the traffic"</item>
+        <item>"Cranes and towing vehicles stationed at Strategic locations to clear any traffic obstructions"</item>
+        <item>"Patrolling by the Bike-borne Police to de-clog any traffic congestions"</item>
+    </string-array>
+
+    <string-array name="car_points">
+        <item>"Don't Drink while Driving."</item>
+        <item>"Don't Drive under the influence of drugs."></item>
+        <item>"Obey the instructions of Police on duty."</item>
+        <item>"Don’t overtake vehicles. "</item>
+        <item>"Use the indicator or hand signals when changing lanes."</item>
+        <item>"Adhere to permitted speed limits"</item>
+        <item>"Don't use your cell phone while driving. If you must, move to the left, halt and then make the call."</item>
+        <item>"Do not drink and drive as it adversely affects your judgement and abilities."</item>
+        <item>"Wear seat belts."</item>
+        <item>"If you feel sleepy, stop at a safe place. Do not stop on the hard shoulder of a motorway"</item>
+    </string-array>
+
+    <string-array name="pilgrims_points">
+        <item>"Warangal rural police welcomes to Medaram Jathara."</item>
+        <item>"Warangal rural Police have made vast arrangements for security and darshan of pilgrims."</item>
+        <item>"Take care of valuable articles, ornaments, vehicles and also children."</item>
+        <item>"Incase of missing persons, contact police control room and wait till arrival of missing person."</item>
+        <item>"Maintain ‘Q’-Line while boarding RTC buses with patience, co-operate with Police and RTC staff."</item>
+        <item>"Do not keep valuable items in vehicles."</item>
+        <item>"Take care of children and old aged persons, do not let them free."</item>
+        <item>"Do not accept any food items from unknown persons."</item>
+        <item>"Please keep your home address and mobile numbers at your children and old aged persons."</item>
+    </string-array>
+
+    <string-array name="crowd_points">
+        <item>"CCTVs and drone cameras will be utilized to monitor the situation from Command and Control room."</item>
+        <item>"Drop gates will be installed on all routes leading to Gadde to prevent crowd surge at worship place."</item>
+        <item>"Professional swimmers will be deployed at bathing ghats to avert accidental drowning."</item>
+        <item>"Police help desks have been arranged all along the route for the benefit of pilgrims."</item>
+        <item>"Public Addressing Systems, Out posts and Control rooms are being established for announcing about the orderliness, missing persons,crime control, RTC busses information, safe guard of personal belongings, precautions against drowning."</item>
     </string-array>
 
     <string-array name="phonenum">
@@ -37,7 +86,14 @@
         <item>@drawable/ic_action_notification</item>
         <item>@drawable/ic_action_location</item>
         <item>@drawable/ic_action_about</item>
+        <item>@drawable/ic_action_about</item>
     </array>
+    <string name="traffic">Traffic Guidelines</string>
+    <string name="car">Car-driving Guidelines</string>
+    <string name="Crowd">Crowd Control</string>
+    <string name="pilgrims">Pilgrims Instructions</string>
+
+
     <string name="title_events">Schedule</string>
     <string name="title_routes">Routes</string>
     <string name="title_parking">Parking</string>
@@ -45,6 +101,9 @@
     <string name="title_notifications">Notifications</string>
     <string name="title_location">Saved Locations</string>
     <string name="title_about">About</string>
+    <string name="title_traffic">Traffic Guidelines</string>
+    <string name="title_police">Police Guidelines</string>
+
 
     <string name="day1">Goddess Saralamma Ammavaru will arrive on Gadde from Kannepally village</string>
     <string name="day2">Goddess Sammakka Ammavaru will arrive on Gadde from Chilakala Gutta.</string>

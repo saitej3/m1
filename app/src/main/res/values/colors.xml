@@ -25,5 +25,9 @@
 
     <color name="direction_color">#40B4F9</color>
 
+    <color name="frag_back">#d7d7d7</color>
+    <color name="frag_back1">#E0DFDF</color>
+    <color name="navbar_text">#151515</color>
+    <color name="navbar_back">#1e1e1e</color>
 
 </resources>
