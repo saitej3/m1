@@ -16,13 +16,15 @@ import com.google.android.gms.gcm.GcmListenerService;
 import com.saitej3.medaramjathara.DataBase.DataBaseHandler;
 import com.saitej3.medaramjathara.activity.MainActivity;
 
+import org.json.JSONObject;
+
 public class GCMIntentService extends GcmListenerService {
 
 	private static final String TAG = "GCMIntentService";
 
     @Override
     public void onCreate() {
-        Toast.makeText(this, "created", Toast.LENGTH_LONG).show();
+
     }
 
     @Override
@@ -35,13 +37,26 @@ public class GCMIntentService extends GcmListenerService {
         //Toast.makeText(this,"getting message",Toast.LENGTH_LONG).show();
         Log.d("me", "created");
 
-        String message = data.getString("message");
-        DataBaseHandler db=new DataBaseHandler(this);
-        db.addNotification(message);
+        if(data.getString("message")==null)
+        {
+            String main=data.getString("parking");
+            Log.d("string",main);
+            String string1=main.substring(27,28);
+            String string2=main.substring(7,9);
+            DataBaseHandler db=new DataBaseHandler(this);
+            db.updateMarker(Integer.parseInt(string2),Integer.parseInt(string1));
+        }
+        else
+        {
+            String message = data.getString("message");
+            DataBaseHandler db=new DataBaseHandler(this);
+            db.addNotification(message);
 
-        generateNotification(this,message);
-        Log.d(TAG, "From: " + from);
-        Log.d(TAG, "Message: " + message);
+            generateNotification(this,message);
+            Log.d(TAG, "From: " + from);
+            Log.d(TAG, "Message: " + message);
+        }
+
     }
 
     /**

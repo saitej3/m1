@@ -22,7 +22,7 @@ public class MarkerItem {
         this.lon = lon;
     }
 
-    public MarkerItem(int markerId,String name,double lon,double lat,int status)
+    public MarkerItem(int markerId,String name,double lat,double lon,int status)
     {
         this.markerId=markerId;
         this.name = name;

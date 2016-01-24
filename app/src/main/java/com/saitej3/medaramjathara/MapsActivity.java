@@ -49,6 +49,7 @@ package com.saitej3.medaramjathara;
 
 public class MapsActivity extends AppCompatActivity implements RoutingListener, GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks,MyDialog.Communicator,Button.OnClickListener{
     protected GoogleMap map;
+    protected ArrayList<MarkerItem>markers;
     protected ArrayList<MarkerItem>markerscamp;
     protected ArrayList<MarkerItem>markerstemple;
     protected ArrayList<MarkerItem>markersplaces;
@@ -145,13 +146,19 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
 
 
         DataBaseHandler db=new DataBaseHandler(this);
-        int parkingmarkers=db.getMarkersCount();
+        markers=new ArrayList<>();
         for(int i=38;i<=67;i++)
         {
             MarkerItem marker =db.getMarker(i);
+            Log.d("marker", String.valueOf(marker.getStatus()));
             if(marker.getStatus()==0)
             {
-                map.addMarker(new MarkerOptions().position(new LatLng(marker.getLat(), marker.getLon())).title(marker.getName()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_park1)));
+                Log.d("marker", "good");
+                Log.d("marrker", String.valueOf(marker.getMarkerId()));
+                Log.d("marrker",marker.getName());
+                Log.d("marker", String.valueOf(marker.getLon()));
+                Log.d("ma", String.valueOf(marker.getLon()));
+                markers.add(marker);
             }
             else if(marker.getStatus()==1)
             {
@@ -230,6 +237,11 @@ public class MapsActivity extends AppCompatActivity implements RoutingListener, 
         markersplaces.add(new MarkerItem(85,"Chelpur",79.84268899999999,18.3706343));
         markersplaces.add(new MarkerItem(86,"Bhupalpally",79.8674297,18.438189));
 
+        for(MarkerItem markerItem:markers)
+        {
+            Marker m=map.addMarker(new MarkerOptions().position(new LatLng(markerItem.getLat(), markerItem.getLon())).title(markerItem.getName()).icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))  ;
+            Log.d("marker", String.valueOf(markerItem));
+        }
         for(MarkerItem markerItem:markerstemple)
         {
             Marker m=map.addMarker(new MarkerOptions().position(new LatLng(markerItem.getLat(), markerItem.getLon())).title(markerItem.getName()).icon(BitmapDescriptorFactory.fromResource(R.mipmap.ic_marker_temple)))  ;
